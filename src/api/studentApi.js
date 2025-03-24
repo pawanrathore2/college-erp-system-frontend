@@ -1,6 +1,16 @@
 import axiosConfig from '../config/axios_config'
 
-
+const getAllStudents = async () => {
+    try {
+        const response = await axiosConfig.get("/students")
+        if (response.status == 200) {
+            return response.data
+        }
+    } catch (error) {
+        console.error(error)
+        throw new Error("Failed To load Students")
+    }
+}
 const login = async ({ username, password }) => {
     try {
         const response = await axiosConfig.post('/students/login',
@@ -13,4 +23,4 @@ const login = async ({ username, password }) => {
     }
 }
 
-export default { login }
+export default { login, getAllStudents }
