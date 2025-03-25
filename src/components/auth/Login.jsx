@@ -6,10 +6,13 @@ const Login = () => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading]=useState(false)
 
     const goToDashboard = () => {
+        setLoading(true)
         studentApi.login({ username, password })
             .then((isLoggedIn) => {
+                setLoading(false)
                 if (isLoggedIn) {
                     navigate("/dashboard")
                 } else {
@@ -79,11 +82,12 @@ const Login = () => {
                     </a>
                 </div>
                 <button
+                    disabled={loading}
                     onClick={goToDashboard}
                     type="submit"
-                    className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 text-white ${loading?"bg-blue-100":"bg-blue-600"} rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 >
-                    Login
+                    {loading? "Signing in":"Login"}
                 </button>
                 {/* </form> */}
                 <p className="text-sm text-center text-gray-600">

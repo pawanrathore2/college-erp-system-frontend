@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveStudent } from '../../slices/studentSlice';
+import Loading from '../common/Loading';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -9,16 +12,17 @@ const Register = () => {
         lastName: '',
         dob: '',
     });
+    const dispatch = useDispatch()
+    const studentState = useSelector(state => state.student)
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target; // de-structure target object
         setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add form submission logic here
-        console.log('Form submitted:', formData);
+        dispatch(saveStudent(formData))
     };
 
     return (
@@ -79,12 +83,22 @@ const Register = () => {
                     className="mb-4 p-3 text-lg border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
-                <button
-                    type="submit"
-                    className="p-3 text-lg text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                    Register
-                </button>
+                {
+                    (studentState.status == "pending") ?
+                        <Loading /> :
+                        <button
+                            type="submit"
+                            className="p-3 text-lg text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            Register
+                        </button>
+                }
+                {
+                    studentState.status == "failed" && <p className="text-red-500">Error: {studentState.error}</p>
+                }
+                {
+                    studentState.status == "success" && <p className="text-green-500">Student registered successfully</p>   
+                }
             </form>
         </div>
     );

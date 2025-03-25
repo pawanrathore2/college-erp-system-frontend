@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStudents } from '../../slices/studentSlice';
+import Loading from '../common/Loading';
 
 export default function StudentList() {
     const studentState = useSelector(state => state.student)
@@ -10,12 +11,7 @@ useEffect(()=>{
 },[])
     if (studentState.status == "idle") return
     if (studentState.status == "pending")
-        return (
-            <div className="flex justify-center items-center h-64">
-                <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
-                <span className="ml-4 text-gray-500">Loading...</span>
-            </div>
-        )
+        return <Loading />
     if (studentState.status == "failed") return <h1>Error : Fetching students</h1>
 
     return (

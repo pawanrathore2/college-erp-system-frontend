@@ -11,6 +11,17 @@ const getAllStudents = async () => {
         throw new Error("Failed To load Students")
     }
 }
+const createStudent = async (student) => {
+    try {
+        const response = await axiosConfig.post("/students", student)
+        if (response.status == 201) {
+            return response.data
+        }
+    } catch (error) {
+        console.error(error)
+        throw new Error("Failed To create Student")
+    }
+}
 const login = async ({ username, password }) => {
     try {
         const response = await axiosConfig.post('/students/login',
@@ -23,4 +34,4 @@ const login = async ({ username, password }) => {
     }
 }
 
-export default { login, getAllStudents }
+export default { login, getAllStudents, createStudent }
