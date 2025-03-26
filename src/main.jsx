@@ -9,6 +9,7 @@ import Login from './components/auth/Login.jsx'
 import Register from './components/auth/Register.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import store from './app/store.js'
+import StudentDashboard from './pages/StudentDashboard.jsx'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="register" element={<Register />} />
           </Route>
           <Route path='/dashboard' element={<DashboardPage />} />
+          <Route path='/student-dashboard' element={<StudentDashboard/>} />
         </Routes>
       </BrowserRouter>
 

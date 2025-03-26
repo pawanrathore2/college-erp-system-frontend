@@ -14,7 +14,7 @@ const Login = () => {
             .then((isLoggedIn) => {
                 setLoading(false)
                 if (isLoggedIn) {
-                    navigate("/dashboard")
+                    navigate("/student-dashboard")
                 } else {
                     console.log("Invalid credentials")
                     alert("Login failed")
