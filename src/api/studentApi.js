@@ -12,14 +12,15 @@ const getAllStudents = async () => {
     }
 }
 const createStudent = async (student) => {
+    let response
     try {
-        const response = await axiosConfig.post("/students", student)
+        response = await axiosConfig.post("/students", student)
         if (response.status == 201) {
             return response.data
         }
     } catch (error) {
-        console.error(error)
-        throw new Error("Failed To create Student")
+        if(!error.response) throw new Error("Failed to create student")
+            
     }
 }
 const login = async ({ username, password }) => {

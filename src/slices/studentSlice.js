@@ -12,6 +12,7 @@ const studentSlice = createSlice({
         students: [],
         selectedStudent: null,
         status: "idle",
+        message: ""
     },
     reducers: {
         selecteStudent: (state, action) => {
@@ -43,11 +44,14 @@ const studentSlice = createSlice({
             })
             .addCase(saveStudent.fulfilled, (state, action) => {
                 state.status = "success"
+                state.message = "Registration Success"
                 state.students.push(action.payload)
                 return state
             })
-            .addCase(saveStudent.rejected, (state) => {
+            .addCase(saveStudent.rejected, (state, action) => {
                 state.status = "failed"
+                console.log("payload",action.payload)
+                state.message = action.payload.message
                 return state
             })
             

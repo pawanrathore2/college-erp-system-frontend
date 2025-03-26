@@ -94,10 +94,10 @@ const Register = () => {
                         </button>
                 }
                 {
-                    studentState.status == "failed" && <p className="text-red-500">Error: {studentState.error}</p>
+                    studentState.status == "failed" && <p className="text-red-500">Error: {studentState.message}</p>
                 }
                 {
-                    studentState.status == "success" && <p className="text-green-500">Student registered successfully</p>   
+                    studentState.status == "success" && <p className="text-green-500">{studentState.message}</p>   
                 }
             </form>
         </div>
