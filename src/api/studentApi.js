@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import axiosConfig from '../config/axios_config'
 
 const getAllStudents = async () => {
@@ -11,16 +12,18 @@ const getAllStudents = async () => {
         throw new Error("Failed To load Students")
     }
 }
-const createStudent = async (student) => {
+const createStudent = async (student, { rejectWithValue}) => {
     let response
     try {
         response = await axiosConfig.post("/students", student)
         if (response.status == 201) {
+            toast.success("Student Created Successfully")
             return response.data
         }
     } catch (error) {
-        if(!error.response) throw new Error("Failed to create student")
-            
+        toast.error(error.response.data.message)
+       return rejectWithValue(error.response.data)
+
     }
 }
 const login = async ({ username, password }) => {
