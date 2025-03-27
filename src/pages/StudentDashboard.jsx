@@ -38,7 +38,7 @@ const StudentDashboard = () => {
                     <div className="flex flex-col items-center">
                         <div className="w-24 h-24 rounded-full bg-gray-300 mb-4">
                             <img
-                                src={"http://localhost:5001/public/images/" + loggedInStudent.profilePhoto}
+                                src={"http://localhost:5001/images/" + loggedInStudent.profilePhoto}
                                 alt=""
 
                             />
