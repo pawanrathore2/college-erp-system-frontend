@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import ProfilePicUploadForm from "../components/student/ProfilePicUploadForm";
+import ProfilePicUploadUsingAxios from "../components/student/ProfilePicUploadUsingAxios";
 
 const StudentDashboard = () => {
-    const [file, setFile] = useState(null)
     const [loggedInStudent, setLoggedInStudent] = useState({})
     useEffect(() => {
         const student = JSON.parse(localStorage.getItem('student'))
@@ -9,7 +10,7 @@ const StudentDashboard = () => {
         if (student) {
             setLoggedInStudent(student)
         }
-    }, [])
+    }, [loggedInStudent])
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -21,17 +22,10 @@ const StudentDashboard = () => {
                 <div className="flex-1 p-6">
                     <h2 className="text-xl font-semibold mb-4">Welcome, Student!</h2>
                     <p className="text-gray-700">Here is your dashboard content.</p>
-                    <form action="http://localhost:5001/students/upload"
-                        method="post"
-                        enctype="multipart/form-data">
-                        <input
-                            className="mt-4 p-3 text-lg border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            type="file" name="profile-photo" />
-                        <input type="hidden"
-                            name="id"
-                            value={loggedInStudent._id} />
-                        <button type="submit" className="mt-4 bg-blue-600 text-white p-2 rounded">Upload</button>
-                    </form>
+                    {/* upload using form */}
+                    <ProfilePicUploadForm id={loggedInStudent._id} />
+                    {/* upload using axios */}
+                    <ProfilePicUploadUsingAxios id={loggedInStudent._id} updatePage={setLoggedInStudent} />
                 </div>
                 {/* Profile Card */}
                 <div className="w-1/4 bg-white shadow-md rounded-lg p-4 m-6">
