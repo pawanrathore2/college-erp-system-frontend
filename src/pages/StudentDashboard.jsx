@@ -4,13 +4,14 @@ import ProfilePicUploadUsingAxios from "../components/student/ProfilePicUploadUs
 
 const StudentDashboard = () => {
     const [loggedInStudent, setLoggedInStudent] = useState({})
+    
     useEffect(() => {
         const student = JSON.parse(localStorage.getItem('student'))
         console.log(student)
         if (student) {
             setLoggedInStudent(student)
         }
-    }, [loggedInStudent])
+    }, [])
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col">

@@ -25,15 +25,20 @@ export default function ProfilePicUploadUsingAxios({ id, updatePage }) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <h1 className='text-4xl'>Upload Using html axios</h1>
+            <h1 className='text-4xl'>Upload Profile Picture</h1>
             <input
                 className="mt-4 p-3 text-lg border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
                 name="profile-photo"
+                accept="image/*"
             />
-
-            <button type="submit" className="mt-4 bg-blue-600 text-white p-2 rounded">Upload</button>
+            <button
+                type="submit"
+                className="mt-4 bg-blue-600 text-white p-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                Upload
+            </button>
         </form>
     )
 }
