@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import studentApi from '../../api/studentApi'
 const Login = () => {
     // to navigate to another page programmatically
@@ -31,15 +31,15 @@ const Login = () => {
                         htmlFor="email"
                         className="block text-sm font-medium text-gray-700"
                     >
-                        Email Address
+                    Username
                     </label>
                     <input
-                        type="email"
+                        type="text"
                         id="email"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter your email"
+                        placeholder="Enter your Username"
                         required
                     />
                 </div>
@@ -92,7 +92,7 @@ const Login = () => {
                 {/* </form> */}
                 <p className="text-sm text-center text-gray-600">
                     Don't have an account?{" "}
-                    <a href="#" className="text-blue-600 hover:underline">
+                    <a href="/register" className="text-blue-600 hover:underline"> 
                         Sign up
                     </a>
                 </p>
